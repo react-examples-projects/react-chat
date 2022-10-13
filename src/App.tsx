@@ -2,10 +2,10 @@ import {
   AppShell,
   Navbar,
   Header,
-  Input,
   Button,
   Box,
   ScrollArea,
+  Textarea,
 } from "@mantine/core";
 import { BiSend } from "react-icons/bi";
 import Chat from "./components/Chat";
@@ -57,32 +57,26 @@ function App() {
       </ScrollArea>
 
       <Box
-        mt="sm"
+        mt="20px"
         sx={() => ({
           display: "flex",
+          alignItems: "flex-end",
           width: "100%",
           gap: "8px",
         })}
       >
-        <Input
-          type="text"
+        <Textarea
           placeholder="¡Habla con tus amigos en este momento!"
-          width="100%"
+          aria-label="¡Habla con tus amigos en este momento!"
+          sx={() => ({ width: "100%" })}
+          minRows={1}
+          maxRows={4}
+          autosize
         />
-        <Button leftIcon={<BiSend />}>Enviar</Button>
+        <Button leftIcon={<BiSend />} sx={() => ({ height: "44px" })}>
+          Enviar
+        </Button>
       </Box>
-      {/* <Grid style={{ width: "100%", height: "52px" }} mt="sm">
-        <Grid.Col sm={10} md={10} lg={11} xl={11} span={11}>
-          <Input
-            type="text"
-            placeholder="¡Habla con tus amigos en este momento!"
-          />
-        </Grid.Col>
-
-        <Grid.Col sm={2} md={2} lg={1} xl={1} span={1}>
-          <Button leftIcon={<BiSend />}>Enviar</Button>
-        </Grid.Col>
-      </Grid> */}
     </AppShell>
   );
 }
