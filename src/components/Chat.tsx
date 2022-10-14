@@ -19,12 +19,12 @@ const BoxTextStyles = (theme: MantineTheme) => ({
         : theme.colors.gray[1],
   },
 });
-
-const UsernameStyles = (theme: MantineTheme) => ({
+ 
+const UsernameStyles = () => ({
   marginBottom: "0.5rem",
 });
 
-const BoxContainerStyles = (theme: MantineTheme) => ({
+const BoxContainerStyles = () => ({
   marginBottom: "0.8rem",
 });
 

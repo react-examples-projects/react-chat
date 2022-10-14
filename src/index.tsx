@@ -4,7 +4,7 @@ import App from "./App";
 import { MantineProvider } from "@mantine/core";
 
 import "normalize.css";
-import "./index.css";
+import "./styles/styles.scss";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,12 +12,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <MantineProvider
-      theme={{
-        colorScheme: "dark",
-      }}
-      withGlobalStyles
-    >
+    <MantineProvider theme={{ colorScheme: "dark" }} withGlobalStyles>
       <App />
     </MantineProvider>
   </React.StrictMode>
