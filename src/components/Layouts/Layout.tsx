@@ -1,8 +1,8 @@
-import { AppShell, Navbar, Header } from "@mantine/core";
+import { AppShell, Navbar, Header, Box } from "@mantine/core";
 import { ReactElement } from "react";
 
 interface ILayout {
-  children: ReactElement;
+  children: ReactElement [];
 }
 
 export default function Layout({ children }: ILayout) {
@@ -30,7 +30,15 @@ export default function Layout({ children }: ILayout) {
         },
       })}
     >
-      {children}
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          height: "calc(100vh - 92px)",
+        }}
+      >
+        {children}
+      </Box>
     </AppShell>
   );
 }
