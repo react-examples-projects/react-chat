@@ -1,13 +1,9 @@
-import { RefObject, useRef } from "react";
-
-interface ScrollObject<T> {
-  ref: RefObject<T>;
-  scrollToBottom: () => void;
-}
+import { useRef } from "react";
+import { IScrollObject } from "../interfaces";
 
 export default function useScrollToBottom<
   T extends HTMLElement
->(): ScrollObject<T> {
+>(): IScrollObject<T> {
   const ref = useRef<T>(null);
   console.log(ref.current);
 

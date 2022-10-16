@@ -1,19 +1,16 @@
-import { AppShell, Navbar, Header, Box } from "@mantine/core";
+import { AppShell, Header, Box, } from "@mantine/core";
 import { ReactElement } from "react";
+import ActiveUsers from "../ActiveUsers";
 
 interface ILayout {
-  children: ReactElement [];
+  children: ReactElement[] | ReactElement;
 }
 
 export default function Layout({ children }: ILayout) {
   return (
     <AppShell
       padding="md"
-      navbar={
-        <Navbar width={{ base: 230 }} p="xs">
-          {/* Navbar content */}
-        </Navbar>
-      }
+      navbar={<ActiveUsers />}
       header={
         <Header height={60} p="xs">
           {/* Header content */}

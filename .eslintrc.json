@@ -40,6 +40,8 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "import/prefer-default-export": 0,
+    "react/require-default-props": "warn",
+    "react/no-danger-with-children": "error",
     "import/no-unresolved": [2, { "caseSensitive": false }],
     "import/extensions": [
       "error",

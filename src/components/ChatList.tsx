@@ -1,11 +1,11 @@
 import { ScrollArea } from "@mantine/core";
-import Chat from "./Chat";
+import { IChatListProps } from "../interfaces";
+import ChatItem from "./ChatItem";
 
-interface IChatListProps {
-  dynamicHeight: number;
-}
-
-export default function ChatList({ dynamicHeight }: IChatListProps) {
+export default function ChatList({
+  dynamicHeight,
+  chatHistory,
+}: IChatListProps) {
   return (
     <ScrollArea
       style={{
@@ -15,11 +15,9 @@ export default function ChatList({ dynamicHeight }: IChatListProps) {
       pr="1.3rem"
       id="chat"
     >
-      {Array(100)
-        .fill(0)
-        .map((_, i) => (
-          <Chat key={i} />
-        ))}
+      {chatHistory.map((chat, i) => (
+        <ChatItem key={i} {...chat} />
+      ))}
     </ScrollArea>
   );
 }

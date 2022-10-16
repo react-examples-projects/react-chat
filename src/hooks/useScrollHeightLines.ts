@@ -1,17 +1,9 @@
-import { useState, useCallback, SyntheticEvent } from "react";
-
-type EventScrollHeight = SyntheticEvent<HTMLTextAreaElement>;
-
-interface IScrollHeight {
-  scrollHeightInit: number;
-  maxScrollHeight: number;
-}
-
-interface IScrollHeightInfo {
-  scrollHeight: number;
-  isChangedScrollHeight: boolean;
-  onScrollHeight(e: EventScrollHeight): void | null;
-}
+import { useState, useCallback } from "react";
+import {
+  IScrollHeight,
+  IScrollHeightInfo,
+  TEventScrollHeight,
+} from "../interfaces";
 
 export default function useScrollHeightLines({
   scrollHeightInit,
@@ -21,8 +13,10 @@ export default function useScrollHeightLines({
   const isChangedScrollHeight = scrollHeight !== scrollHeightInit;
 
   const onScrollHeight = useCallback(
-    (e: EventScrollHeight): void | null => {
-      const t = e.target as HTMLElement;
+    (
+      e: TEventScrollHeight | HTMLElement
+    ): void | null => {
+      const t = e instanceof HTMLElement ? e : (e.target as HTMLElement);
       if (!t) return null;
 
       t.style.height = "0";
