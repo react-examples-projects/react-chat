@@ -2,6 +2,9 @@ import { Button, Box, Textarea, CSSObject, MantineTheme } from "@mantine/core";
 import { BiSend, BiImages, BiFileBlank, BiHappy } from "react-icons/bi";
 import { IChatInputTextProps, TEventScrollHeight } from "../interfaces";
 import { useState, useRef, useEffect } from "react";
+import { EmojiClickData } from "emoji-picker-react";
+
+
 import ChatEmoji from "./ChatEmoji";
 import useToggle from "../hooks/useToggle";
 
@@ -82,6 +85,11 @@ export default function ChatInputText({
     setMessage(e.currentTarget.value);
   };
 
+  const onEmojiClick = (emoji: EmojiClickData) => {
+    console.log(emoji);
+    setMessage((msj) => msj + emoji.emoji);
+  };
+
   useEffect(() => {
     if (!message) {
       onScrollHeight(textChatRef.current as HTMLTextAreaElement);
@@ -133,6 +141,7 @@ export default function ChatInputText({
 
       {isOpenEmojiPicket && (
         <ChatEmoji
+          emojiProps={{ onEmojiClick }}
           sx={() => ({
             position: "absolute",
             right: "0",
