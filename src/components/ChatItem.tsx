@@ -1,15 +1,15 @@
 import { Box, Text, MantineTheme, Image, Group } from "@mantine/core";
 import { ReactionBarSelector } from "@charkour/react-reactions";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { IChat } from "../interfaces";
 import Linkify from "react-linkify";
 import useToggle from "../hooks/useToggle";
-import { CSSProperties } from "react";
 
 const BoxTextStyles = (theme: MantineTheme) => ({
   backgroundColor:
     theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
-  padding: "0.8rem",
-  borderRadius: "5px 5px 0 0",
+  padding: "0.5rem",
+  borderRadius: "5px",
   cursor: "text",
   width: "max-content",
   maxWidth: "500px",
@@ -18,36 +18,33 @@ const BoxTextStyles = (theme: MantineTheme) => ({
       theme.colorScheme === "dark"
         ? theme.colors.dark[5]
         : theme.colors.gray[1],
-    "> div": {
-      backgroundColor:
-        (theme.colorScheme === "dark"
-          ? theme.colors.dark[5]
-          : theme.colors.gray[1]) + " !important",
-    },
   },
   "> div > div": {
     width: "100% !important",
   },
 });
 
+const BoxContainerStyles = () => ({
+  marginBottom: "1.5rem",
+});
+
 const BoxTextReactionStyles: CSSProperties = {
-  backgroundColor: "#25262b",
+  background: "transparent",
   borderRadius: "0 0 5px 5px",
   position: "absolute",
   bottom: "-1.5rem",
   left: "0",
   boxShadow: "unset",
+  padding: "0",
 };
 
 const UsernameStyles = () => ({
   marginBottom: "0.5rem",
 });
 
-const BoxContainerStyles = () => ({
-  marginBottom: "1rem",
-});
-
 export default function ChatItem({ profile, time, username, content }: IChat) {
+  const textChatBoxRef = useRef<HTMLDivElement>(null);
+  const [rightDir, setRightDir] = useState(0);
   const [isVisibleReactions, toggleVisibleReactions] = useToggle();
   const REACTION_LIST = [
     {
@@ -66,7 +63,7 @@ export default function ChatItem({ profile, time, username, content }: IChat) {
       key: "smile",
     },
     {
-      label: "haha",
+      label: "oh",
       node: (
         <div
           style={{
@@ -75,12 +72,22 @@ export default function ChatItem({ profile, time, username, content }: IChat) {
             alignItems: "center",
           }}
         >
-          😄
+          🤮
         </div>
       ),
-      key: "smile",
+      key: "oh",
     },
   ];
+
+  useEffect(() => {
+    if (textChatBoxRef.current) {
+      const data = textChatBoxRef.current.getBoundingClientRect();
+      if (data.width < 210) {
+        setRightDir(-13.5);
+      }
+      console.log(data.width);
+    }
+  }, []);
 
   return (
     <Box
@@ -108,7 +115,12 @@ export default function ChatItem({ profile, time, username, content }: IChat) {
             </Text>
           </Group>
 
-          <Box mb="sm" sx={BoxTextStyles} style={{ position: "relative" }}>
+          <Box
+            mb="sm"
+            sx={BoxTextStyles}
+            style={{ position: "relative" }}
+            ref={textChatBoxRef}
+          >
             <Text
               component="pre"
               sx={() => ({
@@ -153,8 +165,8 @@ export default function ChatItem({ profile, time, username, content }: IChat) {
                 style={{
                   backgroundColor: "#1A1B1E",
                   position: "absolute",
-                  bottom: "-2.2rem",
-                  right: "0",
+                  bottom: rightDir === 0 ? "-2.2rem" : "12%",
+                  right: rightDir + "rem",
                 }}
               />
             )}
