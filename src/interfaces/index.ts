@@ -1,6 +1,7 @@
-import { SyntheticEvent, RefObject } from "react";
+import { SyntheticEvent, RefObject, ReactElement } from "react";
 
-export type TEventScrollHeight = SyntheticEvent<HTMLTextAreaElement>;
+export type TEventTextarea = SyntheticEvent<HTMLTextAreaElement>;
+export type TRefHTMLDiv = RefObject<HTMLDivElement>;
 
 export interface IScrollHeight {
   scrollHeightInit: number;
@@ -10,7 +11,7 @@ export interface IScrollHeight {
 export interface IScrollHeightInfo {
   scrollHeight: number;
   isChangedScrollHeight: boolean;
-  onScrollHeight(e: TEventScrollHeight): void | null;
+  onScrollHeight(e: TEventTextarea): void | null;
 }
 
 export interface IScrollObject<T> {
@@ -32,8 +33,30 @@ export interface IChatListProps {
 
 export interface IChatInputTextProps {
   isChangedScrollHeight: boolean;
-  onScrollHeight(e: TEventScrollHeight | HTMLElement): void | null;
+  onScrollHeight(e: TEventTextarea | HTMLElement): void | null;
   addChatItem: (chat: IChat) => void;
 }
 
 export type TToggleState = [state: boolean, toggle: () => void];
+
+interface IReactionList {
+  label: string;
+  key: string;
+  node: ReactElement;
+}
+
+export interface IChatItemReactionProps {
+  reactionList: IReactionList[];
+}
+
+export interface ChatItemReactionsSelectorProps {
+  isVisible: boolean;
+  XYPosition: number;
+}
+
+export interface IReactionPosition {
+  textChatBoxRef: TRefHTMLDiv;
+  reactionSelectorRef: TRefHTMLDiv;
+  userReactionsRef: TRefHTMLDiv;
+  reactionSelectorPosition: number;
+}

@@ -1,6 +1,6 @@
 import { Button, Box, Textarea, CSSObject, MantineTheme } from "@mantine/core";
 import { BiSend, BiImages, BiFileBlank, BiHappy } from "react-icons/bi";
-import { IChatInputTextProps, TEventScrollHeight } from "../interfaces";
+import { IChatInputTextProps, TEventTextarea } from "../interfaces";
 import { useState, useRef, useEffect } from "react";
 import { EmojiClickData } from "emoji-picker-react";
 
@@ -80,7 +80,7 @@ export default function ChatInputText({
     setMessage("");
   };
 
-  const onChangeMessage = (e: TEventScrollHeight) => {
+  const onChangeMessage = (e: TEventTextarea) => {
     onScrollHeight(e);
     setMessage(e.currentTarget.value);
   };

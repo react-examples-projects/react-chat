@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import {
   IScrollHeight,
   IScrollHeightInfo,
-  TEventScrollHeight,
+  TEventTextarea,
 } from "../interfaces";
 
 export default function useScrollHeightLines({
@@ -14,7 +14,7 @@ export default function useScrollHeightLines({
 
   const onScrollHeight = useCallback(
     (
-      e: TEventScrollHeight | HTMLElement
+      e: TEventTextarea | HTMLElement
     ): void | null => {
       const t = e instanceof HTMLElement ? e : (e.target as HTMLElement);
       if (!t) return null;
