@@ -6,7 +6,7 @@ const BoxTextReactionStyles: CSSProperties = {
   background: "transparent",
   borderRadius: "0 0 5px 5px",
   position: "absolute",
-  bottom: "-1.5rem",
+  bottom: "-1.6rem",
   left: "0",
   boxShadow: "unset",
   padding: "0",

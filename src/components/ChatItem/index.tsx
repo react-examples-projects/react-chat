@@ -1,5 +1,5 @@
-import { Box, Text, MantineTheme, Group } from "@mantine/core";
-import { memo } from "react";
+import { Box, Text, MantineTheme, Group, Badge } from "@mantine/core";
+import { memo, useState } from "react";
 import { IChat } from "../../interfaces";
 import ChatItemReactions from "./ChatItemReactions";
 import Linkify from "react-linkify";
@@ -22,6 +22,14 @@ const BoxTextStyles = (theme: MantineTheme) => ({
         ? theme.colors.dark[5]
         : theme.colors.gray[1],
   },
+  "> div:nth-of-type(1) > div > div": {
+    paddingLeft: "0 !important",
+    fontSize: "15px",
+    "& > div:nth-of-type(2) > div span": {
+      fontSize: "14px",
+    },
+  },
+
   "> div > div": {
     width: "100% !important",
   },
@@ -35,11 +43,21 @@ const UsernameStyles = () => ({
   marginBottom: "0.5rem",
 });
 
+const REACTIONS: { [key: string]: string } = {
+  love: "❤️",
+  satisfaction: "👍",
+  happy: "😆",
+  surprise: "😮",
+  sad: "😢",
+  angry: "😡",
+};
+
 const REACTION_LIST = [
   {
     label: "haha",
     node: (
-      <div
+      <Badge
+        color="yellow"
         style={{
           display: "flex",
           justifyContent: "center",
@@ -47,28 +65,21 @@ const REACTION_LIST = [
         }}
       >
         😄
-      </div>
+      </Badge>
     ),
     key: "smile",
   },
-  {
-    label: "oh",
-    node: (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        🤮
-      </div>
-    ),
-    key: "oh",
-  },
 ];
 
+// const REACTION_LISTT = [
+//   {
+//     emoji: "😆",
+//     count: 2,
+//   },
+// ];
+
 function ChatItem({ profile, time, username, content }: IChat) {
+  const [reactions, setReactions] = useState(REACTION_LIST);
   const [isVisibleReactions, toggleVisibleReactions] = useToggle();
   const {
     textChatBoxRef,
@@ -76,6 +87,29 @@ function ChatItem({ profile, time, username, content }: IChat) {
     userReactionsRef,
     reactionSelectorPosition,
   } = useCalculateReactionPosition(isVisibleReactions);
+
+  const onSelect = (label: string) => {
+    setReactions((reacts) => {
+      const newReact = {
+        key: label,
+        label,
+        node: (
+          <Badge
+            color="yellow"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {REACTIONS[label]}
+          </Badge>
+        ),
+      };
+
+      return [...reacts, newReact];
+    });
+  };
 
   return (
     <Box
@@ -132,7 +166,7 @@ function ChatItem({ profile, time, username, content }: IChat) {
             </Text>
 
             <ChatItemReactions
-              reactionList={REACTION_LIST}
+              reactionList={reactions}
               ref={userReactionsRef}
             />
 
@@ -140,6 +174,7 @@ function ChatItem({ profile, time, username, content }: IChat) {
               isVisible={isVisibleReactions}
               XYPosition={reactionSelectorPosition}
               ref={reactionSelectorRef}
+              onSelect={onSelect}
             />
           </Box>
         </Box>

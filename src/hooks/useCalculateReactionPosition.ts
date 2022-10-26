@@ -10,32 +10,23 @@ export default function useCalculateReactionPosition(
   const [reactionSelectorPosition, setReactionSelectorPosition] = useState(0);
 
   useEffect(() => {
-    if (
+    const isReadyNodes =
       textChatBoxRef.current &&
       userReactionsRef.current &&
-      reactionSelectorRef.current
-    ) {
-      const textChatRect = textChatBoxRef.current.getBoundingClientRect();
-      const userReactionsRect =
-        userReactionsRef.current.getBoundingClientRect();
-      const reactionSelectorRect =
-        reactionSelectorRef.current.getBoundingClientRect();
+      reactionSelectorRef.current;
+    if (!isReadyNodes) return;
 
-      const widthTextChat = textChatRect.width;
-      const widthUserReactions = userReactionsRect.width;
-      const widthReactionSelector = reactionSelectorRect.width;
+    const textChatRect = textChatBoxRef.current.getBoundingClientRect();
+    const userReactionsRect = userReactionsRef.current.getBoundingClientRect();
+    const reactionSelectorRect =
+      reactionSelectorRef.current.getBoundingClientRect();
 
-      const totalWidth = Math.ceil(widthReactionSelector + widthUserReactions);
+    const widthTextChat = textChatRect.width;
+    const widthUserReactions = userReactionsRect.width;
+    const widthReactionSelector = reactionSelectorRect.width;
+    const totalWidth = Math.ceil(widthReactionSelector + widthUserReactions);
 
-      console.log({ totalWidth, widthTextChat, widthUserReactions });
-
-      if (totalWidth > widthTextChat) {
-        setReactionSelectorPosition(-13.5);
-      }
-      // if (widthTextChat < 210) {
-      //   setReactionSelectorPosition(-13.5);
-      // }
-    }
+    if (totalWidth > widthTextChat) setReactionSelectorPosition(-13.5);
   }, [isVisibleReactions]);
 
   return {
