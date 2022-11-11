@@ -52,6 +52,10 @@ const REACTIONS: { [key: string]: string } = {
   angry: "😡",
 };
 
+const _REACTION_LIST = [
+  
+]
+
 const REACTION_LIST = [
   {
     label: "haha",
