@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { IReactionPosition } from "../interfaces";
 
+/* 
+  In `ChatItemReactionSelector` is used to put the container at X,Y coords using this variable value
+*/
+const APPROX_COORDS = -13.5;
+
 export default function useCalculateReactionPosition(
   isVisibleReactions: boolean
 ): IReactionPosition {
@@ -26,7 +31,7 @@ export default function useCalculateReactionPosition(
     const widthReactionSelector = reactionSelectorRect.width;
     const totalWidth = Math.ceil(widthReactionSelector + widthUserReactions);
 
-    if (totalWidth > widthTextChat) setReactionSelectorPosition(-13.5);
+    if (totalWidth > widthTextChat) setReactionSelectorPosition(APPROX_COORDS);
   }, [isVisibleReactions]);
 
   return {

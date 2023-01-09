@@ -11,7 +11,7 @@ export interface IScrollHeight {
 export interface IScrollHeightInfo {
   scrollHeight: number;
   isChangedScrollHeight: boolean;
-  onScrollHeight(e: TEventTextarea): void | null;
+  onScrollHeight(_e: TEventTextarea): void | null;
 }
 
 export interface IScrollObject<T> {
@@ -28,13 +28,11 @@ export interface IChat {
 
 export interface IChatListProps {
   dynamicHeight: number;
-  chatHistory: IChat[];
 }
 
 export interface IChatInputTextProps {
   isChangedScrollHeight: boolean;
-  onScrollHeight(e: TEventTextarea | HTMLElement): void | null;
-  addChatItem(chat: IChat): void;
+  onScrollHeight(_e: TEventTextarea | HTMLElement): void | null;
 }
 
 export type TToggleState = [state: boolean, toggle: () => void];
@@ -52,7 +50,7 @@ export interface IChatItemReactionProps {
 export interface ChatItemReactionsSelectorProps {
   isVisible: boolean;
   XYPosition: number;
-  onSelect?: (emojiLabel: string) => void;
+  onSelect?: (_emojiLabel: string) => void;
 }
 
 export interface IReactionPosition {

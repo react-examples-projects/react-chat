@@ -3,8 +3,7 @@ import { BiSend, BiImages, BiFileBlank, BiHappy } from "react-icons/bi";
 import { IChatInputTextProps, TEventTextarea } from "../interfaces";
 import { useState, useRef, useEffect } from "react";
 import { EmojiClickData } from "emoji-picker-react";
-
-
+import useChats from "../hooks/useChats";
 import ChatEmoji from "./ChatEmoji";
 import useToggle from "../hooks/useToggle";
 
@@ -34,8 +33,8 @@ const BtnChatCommonStyles: CSSObject = {
 export default function ChatInputText({
   isChangedScrollHeight,
   onScrollHeight,
-  addChatItem,
 }: IChatInputTextProps) {
+  const { addChat: addChatItem } = useChats();
   const textChatRef = useRef<HTMLTextAreaElement>(null);
   const [message, setMessage] = useState("");
   const [isOpenEmojiPicket, toggleOpenEmojiPicker] = useToggle();

@@ -31,7 +31,7 @@
   ],
   "rules": {
     "quotes": ["warn", "double"],
-    "no-unused-vars": "warn",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
     "no-undef": "error",
     "no-use-before-define": "warn",
     "react-hooks/rules-of-hooks": "error",

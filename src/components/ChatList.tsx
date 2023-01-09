@@ -1,11 +1,10 @@
 import { ScrollArea } from "@mantine/core";
 import { IChatListProps } from "../interfaces";
 import ChatItem from "./ChatItem";
+import useChats from "../hooks/useChats";
 
-export default function ChatList({
-  dynamicHeight,
-  chatHistory,
-}: IChatListProps) {
+export default function ChatList({ dynamicHeight }: IChatListProps) {
+  const chatHistory = useChats((state) => state.chats);
   return (
     <ScrollArea
       style={{
@@ -21,4 +20,3 @@ export default function ChatList({
     </ScrollArea>
   );
 }
- 

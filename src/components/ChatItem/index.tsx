@@ -52,9 +52,7 @@ const REACTIONS: { [key: string]: string } = {
   angry: "😡",
 };
 
-const _REACTION_LIST = [
-  
-]
+const _REACTION_LIST = [];
 
 const REACTION_LIST = [
   {
@@ -127,7 +125,11 @@ function ChatItem({ profile, time, username, content }: IChat) {
         <Box>
           <Group>
             <Text sx={UsernameStyles}>{username}</Text>
-            <Text size="xs" sx={{ color: "#6c757d" }} component="time">
+            <Text
+              size="xs"
+              sx={{ color: "#6c757d", marginBottom: "0.5rem" }}
+              component="time"
+            >
               {time}
             </Text>
           </Group>
