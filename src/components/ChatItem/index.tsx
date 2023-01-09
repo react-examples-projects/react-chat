@@ -1,4 +1,4 @@
-import { Box, Text, MantineTheme, Group, Badge } from "@mantine/core";
+import { Box, Text, MantineTheme, Group, CSSObject } from "@mantine/core";
 import { memo, useState } from "react";
 import { IChat } from "../../interfaces";
 import ChatItemReactions from "./ChatItemReactions";
@@ -9,37 +9,22 @@ import ChatItemReactionSelector from "./ChatItemReactionSelector";
 import ChatItemProfile from "./ChatItemProfile";
 
 const BoxTextStyles = (theme: MantineTheme) => ({
-  backgroundColor:
-    theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
+  backgroundColor: theme.colors.dark[6],
   padding: "0.5rem",
   borderRadius: "5px",
   cursor: "text",
   width: "max-content",
   maxWidth: "500px",
   "&:hover": {
-    backgroundColor:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[5]
-        : theme.colors.gray[1],
-  },
-  "> div:nth-of-type(1) > div > div": {
-    paddingLeft: "0 !important",
-    fontSize: "15px",
-    "& > div:nth-of-type(2) > div span": {
-      fontSize: "14px",
-    },
-  },
-
-  "> div > div": {
-    width: "100% !important",
+    backgroundColor: theme.colors.dark[5],
   },
 });
 
-const BoxContainerStyles = () => ({
+const BoxContainerStyles = (): CSSObject => ({
   marginBottom: "1.5rem",
 });
 
-const UsernameStyles = () => ({
+const UsernameStyles = (): CSSObject => ({
   marginBottom: "0.5rem",
 });
 
@@ -52,33 +37,17 @@ const REACTIONS: { [key: string]: string } = {
   angry: "😡",
 };
 
-const _REACTION_LIST = [];
-
 const REACTION_LIST = [
   {
-    label: "haha",
-    node: (
-      <Badge
-        color="yellow"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        😄
-      </Badge>
-    ),
-    key: "smile",
+    name: "happy",
+    emoji: "😆",
+    count: 2,
+  },{
+    name: "angry",
+    emoji: "😡",
+    count: 5,
   },
 ];
-
-// const REACTION_LISTT = [
-//   {
-//     emoji: "😆",
-//     count: 2,
-//   },
-// ];
 
 function ChatItem({ profile, time, username, content }: IChat) {
   const [reactions, setReactions] = useState(REACTION_LIST);
@@ -91,26 +60,25 @@ function ChatItem({ profile, time, username, content }: IChat) {
   } = useCalculateReactionPosition(isVisibleReactions);
 
   const onSelect = (label: string) => {
-    setReactions((reacts) => {
-      const newReact = {
-        key: label,
-        label,
-        node: (
-          <Badge
-            color="yellow"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {REACTIONS[label]}
-          </Badge>
-        ),
-      };
-
-      return [...reacts, newReact];
-    });
+    // setReactions((reacts) => {
+    //   const newReact = {
+    //     key: label,
+    //     label,
+    //     node: (
+    //       <Badge
+    //         color="yellow"
+    //         style={{
+    //           display: "flex",
+    //           justifyContent: "center",
+    //           alignItems: "center",
+    //         }}
+    //       >
+    //         {REACTIONS[label]}
+    //       </Badge>
+    //     ),
+    //   };
+    //   return [...reacts, newReact];
+    // });
   };
 
   return (

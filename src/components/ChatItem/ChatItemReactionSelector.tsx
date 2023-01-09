@@ -16,7 +16,7 @@ function ChatItemReactionSelector(
       style={{
         backgroundColor: "#1A1B1E",
         position: "absolute",
-        bottom: XYPosition === 0 ? "-2.2rem" : "0",
+        bottom: XYPosition === 0 ? "-2.2rem" : "10%",
         right: XYPosition + "rem",
       }}
     />

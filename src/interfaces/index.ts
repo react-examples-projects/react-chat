@@ -37,14 +37,14 @@ export interface IChatInputTextProps {
 
 export type TToggleState = [state: boolean, toggle: () => void];
 
-interface IReactionList {
-  label: string;
-  key: string;
-  node: ReactElement;
+export interface IReaction {
+  name: string;
+  emoji: string;
+  count: number;
 }
 
 export interface IChatItemReactionProps {
-  reactionList: IReactionList[];
+  reactionList: IReaction[];
 }
 
 export interface ChatItemReactionsSelectorProps {
